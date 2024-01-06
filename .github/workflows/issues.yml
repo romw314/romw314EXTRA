@@ -1,0 +1,18 @@
+name: Close issues
+
+on:
+  issues:
+    types: ['opened', 'reopened']
+
+permissions:
+  issues: write
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4.1.1
+    - run: gh issue close ${{ github.event.issue.number }}
+      env:
+        GH_TOKEN: ${{ github.token }}
